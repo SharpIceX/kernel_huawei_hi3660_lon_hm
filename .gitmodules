@@ -5,3 +5,6 @@
 [submodule "submodules/Magisk"]
 	path = submodules/Magisk
 	url = https://github.com/topjohnwu/Magisk.git
+[submodule "project/kernel/kernel/drivers/kernelsu"]
+	path = project/kernel/kernel/drivers/kernelsu
+	url = https://github.com/ReSukiSU/ReSukiSU.git
