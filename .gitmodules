@@ -1,0 +1,7 @@
+[submodule "submodules/gcc-4.9"]
+	path = submodules/gcc-4.9
+	url = https://mirrors.ustc.edu.cn/aosp/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9
+	branch = ndk-release-r21
+[submodule "submodules/Magisk"]
+	path = submodules/Magisk
+	url = https://github.com/topjohnwu/Magisk.git

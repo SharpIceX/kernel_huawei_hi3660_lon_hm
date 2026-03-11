@@ -1,0 +1,11 @@
+# Compile
+/out
+/.tmp
+/.ccache
+
+# Python
+*.pyc
+__pycache__/
+
+# Log
+*.log
