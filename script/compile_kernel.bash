@@ -6,14 +6,19 @@ set -euo pipefail
 source "./_common.bash"
 
 OUT="$OUT_DIR/kernel"
+TMP_BIN_DIR="$TEMP_DIR/kernel/bin"
 KERNEL_DIR="$PROJECT_DIR/kernel/kernel"
 
 export ARCH="arm64"
 export SUBARCH="arm64"
 export CROSS_COMPILE="ccache $SUBMODULES_DIR/gcc-4.9/bin/aarch64-linux-android-"
-export PATH="$SCRIPT_DIR/submodules/gcc-4.9/bin/:$PATH"
+export PATH="$TMP_BIN_DIR:$SUBMODULES_DIR/gcc-4.9/bin/:$PATH"
 
-mkdir -p "$OUT"
+rm -rfv "$TMP_BIN_DIR"
+mkdir -p "$OUT" "$TMP_BIN_DIR"
+
+ln -sfT "$(command -v python2)" "$TMP_BIN_DIR/python"
+
 cd "$KERNEL_DIR"
 
 echo "正在配置内核"

@@ -1,4 +1,5 @@
 {
+	"editor.formatOnSave": false,
 	"makefile.configureOnOpen": false,
 	"cmake.ignoreCMakeListsMissing": true
 }
