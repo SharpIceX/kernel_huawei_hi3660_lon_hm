@@ -50,7 +50,6 @@ source "drivers/huawei_platform/dp_source/Kconfig"
 source "drivers/huawei_platform/rilsim/Kconfig"
 source "drivers/huawei_platform/kirin_chipsets/Kconfig"
 source "drivers/huawei_platform/vendor_exception/Kconfig"
-source "drivers/huawei_platform/hwaa/Kconfig"
 endif #HUAWEI_PLATFORM
 
 endmenu

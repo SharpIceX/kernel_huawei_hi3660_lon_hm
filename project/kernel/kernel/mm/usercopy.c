@@ -17,7 +17,6 @@
 #include <linux/mm.h>
 #include <linux/slab.h>
 #include <asm/sections.h>
-#include <chipset_common/security/check_root.h>
 
 enum {
 	BAD_STACK = -1,
@@ -68,9 +67,6 @@ static void report_usercopy(const void *ptr, unsigned long len,
 	pr_emerg("kernel memory %s attempt detected %s %p (%s) (%lu bytes)\n",
 		to_user ? "exposure" : "overwrite",
 		to_user ? "from" : "to", ptr, type ? : "unknown", len);
-
-	/* record trace log for stp */
-	stp_save_trace_log(STP_NAME_USERCOPY);
 
 	/*
 	 * For greater effect, it would be nice to do do_group_exit(),

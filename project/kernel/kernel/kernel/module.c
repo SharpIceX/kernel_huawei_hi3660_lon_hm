@@ -63,9 +63,6 @@
 #include <linux/dynamic_debug.h>
 #include <uapi/linux/module.h>
 #include "module-internal.h"
-#ifdef CONFIG_MODULE_SIG
-#include <chipset_common/security/hw_kernel_stp_interface.h>
-#endif
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/module.h>

@@ -18,9 +18,6 @@
 #include "patch_api.h"
 #include "patch_mgr.h"
 #include "sysfs.h"
-#ifdef CONFIG_HW_ROOT_SCAN
-#include <chipset_common/security/root_scan.h>
-#endif
 #ifdef CONFIG_TEE_KERNEL_MEASUREMENT_API
 #include <../../../../../../hisi/ap/kernel/drivers/tzdriver/ca_antiroot/rootagent.h>
 #endif
@@ -94,9 +91,6 @@ static ssize_t enabled_store(struct kobject *kobj, struct kobj_attribute *attr,
 		goto end;
 	}
 
-#ifdef CONFIG_HW_ROOT_SCAN
-	root_scan_pause(D_RSOPID_KCODE, NULL);
-#endif
 #ifdef CONFIG_TEE_KERNEL_MEASUREMENT_API
 	pause_measurement();
 #endif
@@ -106,9 +100,6 @@ static ssize_t enabled_store(struct kobject *kobj, struct kobj_attribute *attr,
 		ret = oases_insn_patch(info->id);
 #ifdef CONFIG_TEE_KERNEL_MEASUREMENT_API
 	resume_measurement();
-#endif
-#ifdef CONFIG_HW_ROOT_SCAN
-	root_scan_resume(D_RSOPID_KCODE, NULL);
 #endif
 
 	if (ret) {

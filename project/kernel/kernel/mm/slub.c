@@ -44,11 +44,6 @@
 
 #include <linux/jiffies.h>
 
-#if defined(CONFIG_HW_SLUB_DF) || defined(CONFIG_HW_SLUB_SANITIZE)
-#include <chipset_common/security/upload_double_free.h>
-#endif
-#include <chipset_common/security/check_root.h>
-
 #ifdef CONFIG_HW_SLUB_DF
 static void set_harden_double_free_check_flags(bool status);
 static bool fill_random_malloc = false;
@@ -293,7 +288,6 @@ static inline void set_freepointer(struct kmem_cache *s, void *object, void *fp)
 		s->flags |= SLAB_CLEAR;
 #endif
 		WARN_ON(1);
-		upload_double_free_log(s,"light double free checked");
 		return;
 	}
 #endif
@@ -346,7 +340,6 @@ static inline bool hw_check_canary(struct kmem_cache *s, void *object, unsigned 
 
 	if (*canary == hw_get_canary_value(canary, value))
 	{
-		upload_double_free_log(s, "harden double free checked");
 #ifdef CONFIG_HW_SLUB_DF_BUGON
 		BUG_ON(1);
 #endif
@@ -366,7 +359,6 @@ static inline bool hw_check_and_set_canary(struct kmem_cache *s, void *object, u
 
 	if (*canary == hw_get_canary_value(canary, value))
 	{
-		upload_double_free_log(s, "harden double free checked");
 #ifdef CONFIG_HW_SLUB_DF_BUGON
 		BUG_ON(1);
 #endif
@@ -4055,9 +4047,6 @@ err:
 	pr_err("ptr = %pK, page = %pK, n = %lu\n", ptr, page, n);
 	pr_err("page_addr = %pK, kmem_cache = %pK, size = %d, object= %lu, red_left_pad = %d",
 			page_address(page), s, s->size, object_size, s->red_left_pad);
-
-	/* record trace log for stp */
-	stp_save_trace_log(STP_NAME_USERCOPY);
 
 	BUG();
 }

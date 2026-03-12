@@ -3894,10 +3894,6 @@ int f2fs_is_permitted_context(struct inode *parent, struct inode *child);
 int f2fs_sdp_crypt_inherit(struct inode *parent, struct inode *child,
 		void *dpage, void *fs_data);
 
-/** keyinfo.c
- */
-int f2fs_get_crypt_keyinfo(struct inode *inode, void *fs_data, int *flag);
-
 /** sdp_context.c
  */
 extern const struct f2fs_sdp_fscrypt_operations f2fs_sdp_cryptops;

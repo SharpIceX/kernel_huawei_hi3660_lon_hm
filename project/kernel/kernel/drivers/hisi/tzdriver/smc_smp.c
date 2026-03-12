@@ -23,7 +23,6 @@
 #include <linux/module.h>
 #include <linux/bitops.h>
 #include <linux/version.h>
-#include <chipset_common/security/hw_kernel_stp_interface.h>
 #include <linux/cpumask.h>
 
 
@@ -643,38 +642,6 @@ static int siq_thread_fn(void *arg)
 	}
 }
 
-#define MAX_UPLOAD_INFO_LEN		4
-static void upload_audit_event(unsigned int eventindex)
-{
-	struct stp_item item;
-	int ret = 0;
-	char att_info[MAX_UPLOAD_INFO_LEN + 1] = {0};
-
-	att_info[0] = (unsigned char)(eventindex>>24);
-	att_info[1] = (unsigned char)(eventindex>>16);
-	att_info[2] = (unsigned char)(eventindex>>8);
-	att_info[3] = (unsigned char)eventindex;
-	att_info[MAX_UPLOAD_INFO_LEN] = '\0';
-
-	item.id = item_info[ITRUSTEE].id;// 0x00000185;
-	item.status = STP_RISK;
-	item.credible = STP_REFERENCE;//STP_CREDIBLE;
-	item.version = 0;
-
-	ret = strncpy_s(item.name, STP_ITEM_NAME_LEN, item_info[ITRUSTEE].name, sizeof(item_info[ITRUSTEE].name));
-	if(EOK != ret)
-		tloge("strncpy_s failed  %x . \n", ret);
-	tlogd("stp get size %lx succ \n", sizeof(item_info[ITRUSTEE].name));
-
-	ret = kernel_stp_upload(item, att_info);
-	if (ret != 0) {
-		tloge("stp %x event upload failed \n", eventindex);
-	}
-	else {
-		tloge("stp %x event upload succ \n", eventindex);
-	}
-}
-
 static void cmd_result_check(TC_NS_SMC_CMD* cmd)
 {
 	if ((TEEC_SUCCESS == cmd->ret_val) && (TEEC_SUCCESS
@@ -699,7 +666,6 @@ static void cmd_result_check(TC_NS_SMC_CMD* cmd)
 				cmd->ret_val, cmd->err_origin);
 		tloge("error smc call: status = %x and cmd.err_origin=%x\n",
 				cmd->eventindex, cmd->err_origin);
-		upload_audit_event(cmd->eventindex);
 	}
 }
 
