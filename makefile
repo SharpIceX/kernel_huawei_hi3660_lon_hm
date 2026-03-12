@@ -1,5 +1,4 @@
 OUT_DIR := ./out
-TMEP_DIR := ./.tmp
 SCRIPT_DIR := ./script
 
 .DEFAULT_GOAL := default
@@ -16,5 +15,5 @@ magiskboot:
 	cd "$(SCRIPT_DIR)" && bash "./compile_magiskboot.bash"
 
 clean:
-	rm -rf "$(OUT_DIR)" "$(TMEP_DIR)"
+	rm -rf "$(OUT_DIR)"
 	cd "./submodules/Magisk" && python3 "./build.py" clean native
