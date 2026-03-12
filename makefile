@@ -14,6 +14,9 @@ kernel:
 magiskboot:
 	cd "$(SCRIPT_DIR)" && bash "./compile_magiskboot.bash"
 
+pack_kernel:
+	cd "$(SCRIPT_DIR)" && bash "./compile_pack_kernel.bash"
+
 clean:
 	rm -rf "$(OUT_DIR)"
 	cd "./submodules/Magisk" && python3 "./build.py" clean native
