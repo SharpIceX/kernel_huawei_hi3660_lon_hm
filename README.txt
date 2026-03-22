@@ -3,7 +3,6 @@
 内核上游日期：2021-11-17
 
 ! 记得拉取所有子模块：“git submodule update --init --recursive”
-! 安装前格式化“userdata”并手动刷入“hw_init”数据
 
 ## 内核
 
