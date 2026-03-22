@@ -14,9 +14,6 @@ export SUBARCH="arm64"
 export CROSS_COMPILE="ccache aarch64-linux-android-"
 export PATH="$PROJECT_DIR/gcc-4.9/bin:$TMP_BIN_DIR:$SUBMODULES_DIR/gcc-4.9/bin/:$PATH"
 
-export KBUILD_BUILD_USER="SharpIce"
-export KBUILD_BUILD_HOST="SharpIce"
-
 rm -rf "$TMP_BIN_DIR"
 mkdir -p "$OUT" "$TMP_BIN_DIR"
 
