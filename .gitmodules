@@ -5,6 +5,6 @@
 [submodule "submodules/Magisk"]
 	path = submodules/Magisk
 	url = https://github.com/topjohnwu/Magisk.git
-[submodule "project/ReSukiSU"]
+[submodule "submodules/ReSukiSU"]
 	path = submodules/ReSukiSU
 	url = https://github.com/ReSukiSU/ReSukiSU.git

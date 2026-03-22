@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # shellcheck disable=SC1091
-source "./_common.bash"
+source "./utils/setup_compiler.bash"
 
 OUT="$OUT_DIR/kernel"
 TMP_BIN_DIR="$TEMP_DIR/kernel/bin"
@@ -13,6 +13,9 @@ export ARCH="arm64"
 export SUBARCH="arm64"
 export CROSS_COMPILE="ccache aarch64-linux-android-"
 export PATH="$PROJECT_DIR/gcc-4.9/bin:$TMP_BIN_DIR:$SUBMODULES_DIR/gcc-4.9/bin/:$PATH"
+
+export KBUILD_BUILD_USER="SharpIce"
+export KBUILD_BUILD_HOST="SharpIce"
 
 rm -rf "$TMP_BIN_DIR"
 mkdir -p "$OUT" "$TMP_BIN_DIR"
@@ -27,7 +30,6 @@ make ARCH="$ARCH" \
      O="$OUT" \
      "merge_hi3660_defconfig"
 
-NPROC=$(($(nproc) - 2))
 echo "正在编译内核（使用 $NPROC 个核心）"
 make ARCH="$ARCH" \
      O="$OUT" \

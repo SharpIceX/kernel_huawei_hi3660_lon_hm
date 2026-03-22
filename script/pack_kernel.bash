@@ -8,7 +8,7 @@ printktimer=0xfff0a000,0x534,0x538 androidboot.selinux=permissive \
 buildvariant=user"
 
 # shellcheck disable=SC1091
-source "./_common.bash"
+source "./utils/env.bash"
 
 OUT="$OUT_DIR/kernel.img"
 

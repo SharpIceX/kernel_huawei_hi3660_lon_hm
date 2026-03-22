@@ -1,22 +1,21 @@
-OUT_DIR := ./out
 SCRIPT_DIR := ./script
+TOOLS_DIR  := $(SCRIPT_DIR)/tools
 
 .DEFAULT_GOAL := default
-.PHONY: default clean magisk kernel
+.PHONY: clean kernel pack_kernel magiskboot
 
 default:
 	@echo "请指定具体的操作目标！"
 	@exit 1
 
-kernel:
-	cd "$(SCRIPT_DIR)" && bash "./compile_kernel.bash"
+clean:
+	cd "$(TOOLS_DIR)" && bash "./clean.bash"
 
-magiskboot:
-	cd "$(SCRIPT_DIR)" && bash "./compile_magiskboot.bash"
+kernel:
+	cd "$(SCRIPT_DIR)" && bash "./kernel.bash"
 
 pack_kernel:
-	cd "$(SCRIPT_DIR)" && bash "./compile_pack_kernel.bash"
+	cd "$(SCRIPT_DIR)" && bash "./pack_kernel.bash"
 
-clean:
-	rm -rf "$(OUT_DIR)"
-	cd "./submodules/Magisk" && python3 "./build.py" clean native
+magiskboot:
+	cd "$(SCRIPT_DIR)" && bash "./magiskboot.bash"

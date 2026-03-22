@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # shellcheck disable=SC1091
-source "./_common.bash"
+source "./utils/setup_compiler.bash"
 
 OUT="$OUT_DIR/magiskboot"
 MAGISK_DIR="$SUBMODULES_DIR/Magisk"
